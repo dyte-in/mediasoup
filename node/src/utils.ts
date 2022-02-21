@@ -1,4 +1,5 @@
 import { randomInt } from 'crypto';
+import { arch, platform } from 'os';
 
 /**
  * Clones the given object/array.
@@ -26,3 +27,13 @@ type Only<T, U> = {
 };
 
 export type Either<T, U> = Only<T, U> | Only<U, T>;
+
+/**
+ * Get the current platform triplet.
+ *
+ * @returns {string}
+ */
+export function getTriplet(): string
+{
+	return `${platform()}-${arch()}`;
+}

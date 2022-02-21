@@ -36,7 +36,7 @@
     "worker/Makefile",
     "worker/meson.build",
     "worker/meson_options.txt",
-    "worker/out/Release/mediasoup-worker",
+    "worker/out/*/Release/mediasoup-worker",
     "npm-scripts.js"
   ],
   "keywords": [

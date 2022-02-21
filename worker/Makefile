@@ -6,7 +6,7 @@
 PYTHON ?= $(shell command -v python3 2> /dev/null || echo python)
 ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 CORES ?= $(shell ${ROOT_DIR}/scripts/cpu_cores.sh || echo 4)
-MEDIASOUP_OUT_DIR ?= $(shell pwd)/out
+MEDIASOUP_OUT_DIR ?= $(shell pwd)/out/$(shell node ${ROOT_DIR}/scripts/getTriplet.js)
 # Controls build types, `Release` and `Debug` are presets optimized for those use cases.
 # Other build types are possible too, but they are not presets and will require `MESON_ARGS` use to customize build
 # configuration.
