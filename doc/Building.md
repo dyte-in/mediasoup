@@ -64,7 +64,7 @@ The `worker` folder contains a `Makefile` for the mediasoup-worker C++ subprojec
 
 ### `make`
 
-Builds the `mediasoup-worker` binary at `worker/out/Release/`.
+Builds the `mediasoup-worker` binary at `worker/out/*/Release/`.
 
 If the "MEDIASOUP_MAX_CORES" environment variable is set, the build process will use that number of CPU cores. Otherwise it will auto-detect the number of cores in the machine.
 
@@ -72,7 +72,7 @@ If the "MEDIASOUP_MAX_CORES" environment variable is set, the build process will
 Other build types are possible too, but they are not presets and will require "MESON_ARGS" use to customize build configuration.
 Check the meaning of useful macros in the `worker/include/Logger.hpp` header file if you want to enable tracing or other debug information.
 
-Binary is built at `worker/out/MEDIASOUP_BUILDTYPE/build`. 
+Binary is built at `worker/out/*/MEDIASOUP_BUILDTYPE/build`.
 
 In order to instruct the mediasoup Node.js module to use the `Debug` mediasoup-worker binary, an environment variable must be set before running the Node.js application:
 
@@ -89,7 +89,7 @@ $ MEDIASOUP_WORKER_BIN="/home/xxx/src/foo/mediasoup-worker" node myapp.js
 
 ### `make libmediasoup-worker`
 
-Builds the `libmediasoup-worker` static library at `worker/out/Release/`.
+Builds the `libmediasoup-worker` static library at `worker/out/*/Release/`.
 
 `MEDIASOUP_MAX_CORES` and `MEDIASOUP_BUILDTYPE` environment variables from above still apply for static library build.
 
@@ -135,7 +135,7 @@ Rewrites mediasoup-worker C++ files using [clang-format](https://clang.llvm.org/
 
 ### `make test`
 
-Builds and runs the `mediasoup-worker-test` binary at `worker/out/Release/` (or at `worker/out/Debug/` if the "MEDIASOUP_BUILDTYPE" environment variable is set to "Debug"), which uses [Catch2](https://github.com/catchorg/Catch2) to run test units located at `worker/test/` folder.
+Builds and runs the `mediasoup-worker-test` binary at `worker/out/*/Release/` (or at `worker/out/*/Debug/` if the "MEDIASOUP_BUILDTYPE" environment variable is set to "Debug"), which uses [Catch2](https://github.com/catchorg/Catch2) to run test units located at `worker/test/` folder.
 
 
 ### `make tidy`
@@ -151,7 +151,7 @@ Runs [clang-tidy](http://clang.llvm.org/extra/clang-tidy/) and performs C++ code
 
 ### `make fuzzer`
 
-Builds the `mediasoup-worker-fuzzer` binary (which uses [libFuzzer](http://llvm.org/docs/LibFuzzer.html)) at `worker/out/Release/` (or at `worker/out/Debug/` if the "MEDIASOUP_BUILDTYPE" environment variable is set to "Debug").
+Builds the `mediasoup-worker-fuzzer` binary (which uses [libFuzzer](http://llvm.org/docs/LibFuzzer.html)) at `worker/out/*/Release/` (or at `worker/out/*/Debug/` if the "MEDIASOUP_BUILDTYPE" environment variable is set to "Debug").
 
 **Requirements:**
 
