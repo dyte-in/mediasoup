@@ -164,12 +164,12 @@ export type WorkerResourceUsage =
 	/* eslint-enable camelcase */
 }
 
-export type WorkerEvents = 
-{ 
+export type WorkerEvents =
+{
 	died: [Error];
 }
 
-export type WorkerObserverEvents = 
+export type WorkerObserverEvents =
 {
 	close: [];
 	newrouter: [Router];

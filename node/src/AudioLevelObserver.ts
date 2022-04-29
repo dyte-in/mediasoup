@@ -47,7 +47,7 @@ export type AudioLevelObserverEvents = RtpObserverEvents &
 	silence: [];
 }
 
-export type AudioLevelObserverObserverEvents = RtpObserverObserverEvents & 
+export type AudioLevelObserverObserverEvents = RtpObserverObserverEvents &
 {
 	volumes: [AudioLevelObserverVolume[]];
 	silence: [];

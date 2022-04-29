@@ -3,7 +3,7 @@ import { RtpObserver, RtpObserverEvents, RtpObserverObserverEvents } from './Rtp
 import { Producer } from './Producer';
 import { EnhancedEventEmitter } from './EnhancedEventEmitter';
 
-export interface ActiveSpeakerObserverOptions 
+export interface ActiveSpeakerObserverOptions
 {
 	interval?: number;
 
@@ -13,7 +13,7 @@ export interface ActiveSpeakerObserverOptions
 	appData?: Record<string, unknown>;
 }
 
-export interface ActiveSpeakerObserverActivity 
+export interface ActiveSpeakerObserverActivity
 {
 	/**
 	 * The producer instance.

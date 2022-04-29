@@ -155,7 +155,7 @@ export type ConsumerStat =
 export type ConsumerType = 'simple' | 'simulcast' | 'svc' | 'pipe';
 
 export type ConsumerEvents =
-{ 
+{
 	transportclose: [];
 	producerclose: [];
 	producerpause: [];

@@ -129,7 +129,7 @@ export type PlainTransportObserverEvents = TransportObserverEvents &
 {
 	tuple: [TransportTuple];
 	rtcptuple: [TransportTuple];
-	sctpstatechange: [SctpState];	
+	sctpstatechange: [SctpState];
 }
 
 const logger = new Logger('PlainTransport');
