@@ -12,5 +12,11 @@ declare type Only<T, U> = {
     [P in keyof U]?: never;
 };
 export declare type Either<T, U> = Only<T, U> | Only<U, T>;
+/**
+ * Get the current platform triplet.
+ *
+ * @returns {string}
+ */
+export declare function getTriplet(): string;
 export {};
 //# sourceMappingURL=utils.d.ts.map

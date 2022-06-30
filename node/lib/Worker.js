@@ -12,14 +12,15 @@ const Channel_1 = require("./Channel");
 const PayloadChannel_1 = require("./PayloadChannel");
 const Router_1 = require("./Router");
 const WebRtcServer_1 = require("./WebRtcServer");
+const utils_1 = require("./utils");
 // If env MEDIASOUP_WORKER_BIN is given, use it as worker binary.
 // Otherwise if env MEDIASOUP_BUILDTYPE is 'Debug' use the Debug binary.
 // Otherwise use the Release binary.
 const workerBin = process.env.MEDIASOUP_WORKER_BIN
     ? process.env.MEDIASOUP_WORKER_BIN
     : process.env.MEDIASOUP_BUILDTYPE === 'Debug'
-        ? path.join(__dirname, '..', '..', 'worker', 'out', 'Debug', 'mediasoup-worker')
-        : path.join(__dirname, '..', '..', 'worker', 'out', 'Release', 'mediasoup-worker');
+        ? path.join(__dirname, '..', '..', 'worker', 'out', (0, utils_1.getTriplet)(), 'Debug', 'mediasoup-worker')
+        : path.join(__dirname, '..', '..', 'worker', 'out', (0, utils_1.getTriplet)(), 'Release', 'mediasoup-worker');
 const logger = new Logger_1.Logger('Worker');
 const workerLogger = new Logger_1.Logger('Worker');
 class Worker extends EnhancedEventEmitter_1.EnhancedEventEmitter {
@@ -75,9 +76,9 @@ class Worker extends EnhancedEventEmitter_1.EnhancedEventEmitter {
         logger.debug('spawning worker process: %s %s', spawnBin, spawnArgs.join(' '));
         this.#child = (0, child_process_1.spawn)(
         // command
-        spawnBin, 
+        spawnBin,
         // args
-        spawnArgs, 
+        spawnArgs,
         // options
         {
             env: {
