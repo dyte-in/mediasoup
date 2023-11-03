@@ -1,6 +1,69 @@
 # Changelog
 
 
+### 3.12.16
+
+* Fix `IceServer` crash when client uses ICE renomination ([PR #1182](https://github.com/versatica/mediasoup/pull/1182)).
+
+
+### 3.12.15
+
+* Fix NPM "postinstall" task in Windows ([PR #1187](https://github.com/versatica/mediasoup/pull/1187)).
+
+
+### 3.12.14
+
+* CI: Use Node.js version 20 ([PR #1177](https://github.com/versatica/mediasoup/pull/1177)).
+* Use given `PYTHON` environment variable (if given) when running `worker/scripts/getmake.py` ([PR #1186](https://github.com/versatica/mediasoup/pull/1186)).
+
+
+### 3.12.13
+
+* Bump up Meson from 1.1.0 to 1.2.1 (fixes Xcode 15 build issues) ([PR #1163](https://github.com/versatica/mediasoup/pull/1163) by @arcinston).
+
+
+### 3.12.12
+
+* Support C++20 ([PR #1150](https://github.com/versatica/mediasoup/pull/1150) by @o-u-p).
+
+
+### 3.12.11
+
+* Google Transport Feedback: Read Reference Time field as 24bits signed as per spec ([PR #1145](https://github.com/versatica/mediasoup/pull/1145)).
+
+
+### 3.12.10
+
+* Node: Rename `WebRtcTransport.webRtcServerClosed()` to `listenServerClosed()` ([PR #1141](https://github.com/versatica/mediasoup/pull/1141) by @piranna).
+
+
+### 3.12.9
+
+* Fix RTCP SDES ([PR #1139](https://github.com/versatica/mediasoup/pull/1139)).
+
+
+### 3.12.8
+
+* Export `workerBin` absolute path ([PR #1123](https://github.com/versatica/mediasoup/pull/1123)).
+
+
+### 3.12.7
+
+* `SimulcastConsumer`: Fix lack of "layerschange" event when all streams in the producer die ([PR #1122](https://github.com/versatica/mediasoup/pull/1122)).
+
+
+### 3.12.6
+
+* `Worker`: Add `Transport::Destroying()` protected method ([PR #1114](https://github.com/versatica/mediasoup/pull/1114)).
+* `RtpStreamRecv`: Fix jitter calculation ([PR #1117](https://github.com/versatica/mediasoup/pull/1117), thanks to @penguinol).
+* Revert "Node: make types.ts only export types rather than the entire class/code" ([PR #1109](https://github.com/versatica/mediasoup/pull/1109)) because it requires `typescript` >= 5 in the apps that import mediasoup and we don't want to be that strict yet.
+
+
+### 3.12.5
+
+* `DataConsumer`: Fix removed 'bufferedamountlow' notification ([PR #1113](https://github.com/versatica/mediasoup/pull/1113)).
+
+
 ### 3.12.4
 
 * Fix downloaded prebuilt binary check on Windows ([PR #1105](https://github.com/versatica/mediasoup/pull/1105) by @woodfe).

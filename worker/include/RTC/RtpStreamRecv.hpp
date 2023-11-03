@@ -76,6 +76,10 @@ namespace RTC
 		{
 			return this->transmissionCounter.GetLayerBitrate(nowMs, spatialLayer, temporalLayer);
 		}
+		bool HasRtpInactivityCheckEnabled() const
+		{
+			return this->useRtpInactivityCheck;
+		}
 
 	private:
 		void CalculateJitter(uint32_t rtpTimestamp);
@@ -114,7 +118,9 @@ namespace RTC
 		uint64_t lastSrReceived{ 0u };
 		// Relative transit time for prev packet.
 		int32_t transit{ 0u };
-		uint32_t jitter{ 0u };
+		// Jitter in RTP timestamp units. As per spec it's kept as floating value
+		// although it's exposed as integer in the stats.
+		float jitter{ 0 };
 		uint8_t firSeqNumber{ 0u };
 		uint32_t reportedPacketLost{ 0u };
 		std::unique_ptr<RTC::NackGenerator> nackGenerator;

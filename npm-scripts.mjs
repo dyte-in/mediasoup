@@ -204,11 +204,11 @@ async function run()
 			catch (error)
 			{
 				logError(error.message);
+
 				exitWithError();
 			}
 
 			checkRelease();
-
 			executeCmd(`git commit -am '${PKG.version}'`);
 			executeCmd(`git tag -a ${PKG.version} -m '${PKG.version}'`);
 			executeCmd(`git push origin v${MAYOR_VERSION}`);
@@ -243,7 +243,6 @@ async function run()
 		case 'release:upload-mac-arm-prebuilt-worker':
 		{
 			checkRelease();
-
 			await prebuildWorker();
 			await uploadMacArmPrebuiltWorker();
 
@@ -266,7 +265,7 @@ function replaceVersion()
 	const files = fs.readdirSync('node/lib',
 		{
 			withFileTypes : true,
-			recursive     : true
+			recursive     : false
 		});
 
 	for (const file of files)
@@ -419,20 +418,36 @@ function installMsysMake()
 {
 	logInfo('installMsysMake()');
 
-	let res = spawnSync('where', [ 'python3.exe' ]);
+	let pythonPath;
 
-	if (res.status !== 0)
+	// If PYTHON environment variable is given, use it.
+	if (process.env.PYTHON)
 	{
-		res = spawnSync('where', [ 'python.exe' ]);
+		pythonPath = process.env.PYTHON;
+	}
+	// Otherwise ensure python3.exe is available in the PATH.
+	else
+	{
+		let res = spawnSync('where', [ 'python3.exe' ]);
 
 		if (res.status !== 0)
 		{
-			logError('`installMsysMake() | cannot find Python executable');
-			exitWithError();
+			res = spawnSync('where', [ 'python.exe' ]);
+
+			if (res.status !== 0)
+			{
+				logError('`installMsysMake() | cannot find Python executable');
+
+				exitWithError();
+			}
 		}
+
+		pythonPath = String(res.stdout).trim();
 	}
 
-	executeCmd(`${String(res.stdout).trim()} worker\\scripts\\getmake.py`);
+	const dir = path.resolve('worker/out/msys');
+
+	executeCmd(`${pythonPath} worker\\scripts\\getmake.py --dir="${dir}"`);
 }
 
 function ensureDir(dir)
@@ -685,6 +700,7 @@ function executeCmd(command, exitOnError = true)
 		if (exitOnError)
 		{
 			logError(`executeCmd() failed, exiting: ${error}`);
+
 			exitWithError();
 		}
 		else

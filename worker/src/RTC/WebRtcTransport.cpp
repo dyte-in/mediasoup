@@ -300,6 +300,11 @@ namespace RTC
 	{
 		MS_TRACE();
 
+		// We need to tell the Transport parent class that we are about to destroy
+		// the class instance. This is because child's destructor runs before
+		// parent's destructor. See comment in Transport::OnSctpAssociationSendData().
+		Destroying();
+
 		this->shared->channelMessageRegistrator->UnregisterHandler(this->id);
 
 		// Must delete the DTLS transport first since it will generate a DTLS alert
@@ -1053,7 +1058,7 @@ namespace RTC
 		}
 
 		// Trick for clients performing aggressive ICE regardless we are ICE-Lite.
-		this->iceServer->ForceSelectedTuple(tuple);
+		this->iceServer->MayForceSelectedTuple(tuple);
 
 		// Check that DTLS status is 'connecting' or 'connected'.
 		if (
@@ -1137,7 +1142,7 @@ namespace RTC
 		}
 
 		// Trick for clients performing aggressive ICE regardless we are ICE-Lite.
-		this->iceServer->ForceSelectedTuple(tuple);
+		this->iceServer->MayForceSelectedTuple(tuple);
 
 		// Pass the packet to the parent transport.
 		RTC::Transport::ReceiveRtpPacket(packet);

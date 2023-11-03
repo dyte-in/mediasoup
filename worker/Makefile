@@ -20,7 +20,7 @@ PIP_DIR = $(MEDIASOUP_OUT_DIR)/pip
 INSTALL_DIR ?= $(MEDIASOUP_OUT_DIR)/$(MEDIASOUP_BUILDTYPE)
 BUILD_DIR ?= $(INSTALL_DIR)/build
 MESON ?= $(PIP_DIR)/bin/meson
-MESON_VERSION ?= 1.1.0
+MESON_VERSION ?= 1.2.1
 # `MESON_ARGS` can be used to provide extra configuration parameters to Meson,
 # such as adding defines or changing optimization options. For instance, use
 # `MESON_ARGS="-Dms_log_trace=true -Dms_log_file_line=true" npm i` to compile
@@ -81,6 +81,7 @@ endif
 	lint \
 	format \
 	test \
+	test-asan \
 	tidy \
 	fuzzer \
 	fuzzer-run-all \
@@ -224,6 +225,11 @@ else
 	$(LCOV) --directory ./ --zerocounters
 	$(BUILD_DIR)/mediasoup-worker-test --invisibles --use-colour=yes $(MEDIASOUP_TEST_TAGS)
 endif
+
+test-asan: setup
+	$(MESON) compile -C $(BUILD_DIR) -j $(CORES) mediasoup-worker-test-asan
+	$(MESON) install -C $(BUILD_DIR) --no-rebuild --tags mediasoup-worker-test-asan
+	ASAN_OPTIONS=detect_leaks=1 $(BUILD_DIR)/mediasoup-worker-test-asan --invisibles --use-colour=yes $(MEDIASOUP_TEST_TAGS)
 
 tidy:
 	$(PYTHON) ./scripts/clang-tidy.py \

@@ -126,7 +126,7 @@ In order to instruct the mediasoup Node.js module to use the `Debug` mediasoup-w
 MEDIASOUP_BUILDTYPE=Debug node myapp.js
 ```
 
-If the "MEDIASOUP_WORKER_BIN" environment variable is set, mediasoup will use the it as mediasoup-worker binary and **won't** compile the binary:
+If the "MEDIASOUP_WORKER_BIN" environment variable is set (it must be an absolute file path), mediasoup will use the it as mediasoup-worker binary and **won't** compile the binary:
 
 ```bash
 MEDIASOUP_WORKER_BIN="/home/xxx/src/foo/mediasoup-worker" node myapp.js
@@ -153,6 +153,11 @@ Rewrites mediasoup-worker C++ files using [clang-format](https://clang.llvm.org/
 ### `make test`
 
 Builds and runs the `mediasoup-worker-test` binary at `worker/out/Release/` (or at `worker/out/Debug/` if the "MEDIASOUP_BUILDTYPE" environment variable is set to "Debug"), which uses [Catch2](https://github.com/catchorg/Catch2) to run test units located at `worker/test/` folder.
+
+
+### 'make test-asan'
+
+Run test with Address Sanitizer.
 
 ### `make tidy`
 
